@@ -1,4 +1,5 @@
 # Cardano node setup
+
 info about setting up a cardano pool.
 
 - [Guide: How to Set Up a Cardano Stake Pool](https://www.coincashew.com/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node)
@@ -6,39 +7,47 @@ info about setting up a cardano pool.
 - [StakePool Operator Scripts (SPOS)](https://github.com/gitmachtl/scripts)
 - [Installing the node from source](https://github.com/input-output-hk/cardano-node-wiki/blob/main/docs/getting-started/install.md)
 - [CoinCashew - Installing the Glasgow Haskell Compiler and Cabal](https://www.coincashew.com/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node/part-i-installation/installing-ghc-and-cabal)
-## Install on Ubuntu 24.x
+- [10.1.3 Release Note](https://github.com/IntersectMBO/cardano-node/releases/tag/10.1.3)
 
-### build tools
+## Install on Ubuntu 24.x
 
 ``` bash
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 
-Add archive for libncursesw5:
+### Dependencies & Build tools
 
-``` bash
-su
-nano /etc/apt/sources.list.d/ubuntu.sources
-```
+1. Add archive for libncursesw5:
 
-And append this source:
+    ``` bash
+    su
+    nano /etc/apt/sources.list.d/ubuntu.sources
+    ```
 
-``` text
-Types: deb
-URIs: http://security.ubuntu.com/ubuntu
-Suites: focal-security
-Components: main universe
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-```
+    And append this source:
 
-``` bash
-sudo apt-get update -y
-sudo apt install libncurses5
-```
+    ``` text
+    Types: deb
+    URIs: http://security.ubuntu.com/ubuntu
+    Suites: focal-security
+    Components: main universe
+    Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+    ```
 
-``` bash
-sudo apt-get install autoconf automake build-essential curl g++ git jq libffi-dev libgmp-dev libssl-dev libsystemd-dev libtinfo-dev libtool make pkg-config tmux wget zlib1g-dev liblmdb-dev -y
-```
+1. install libncurses5
+
+    ``` bash
+    sudo apt-get update -y
+    sudo apt install libncurses5
+    ```
+
+1. Remove the archive source when done.
+
+1. build tools
+
+    ``` bash
+    sudo apt-get install autoconf automake build-essential curl g++ git jq libffi-dev libgmp-dev libssl-dev libsystemd-dev libtinfo-dev libtool make pkg-config tmux wget zlib1g-dev liblmdb-dev -y
+    ```
 
 ### Installing the Haskell environment
 
@@ -73,7 +82,6 @@ rm -rf /.cabal/store/ghc-<version>
 
 ``` bash
 mkdir $HOME/GitHub
-cd $HOME/GitHub
 ```
 
 env variables:
@@ -88,13 +96,6 @@ echo "iohk-nix version: $IOHKNIX_VERSION"
 
 Cardano uses a custom fork of sodium which exposes some internal functions and adds some other new functions. This fork lives in https://github.com/intersectmbo/libsodium. Users need to install that custom version of sodium with the following steps.
 
-Create a working directory for your builds:
-
-``` bash
-mkdir -p $HOME/src
-cd $HOME/src
-```
-
 Find out the correct sodium version for your build:
 
 ``` bash
@@ -105,6 +106,7 @@ echo "Using sodium version: $SODIUM_VERSION"
 Download and install sodium:
 
 ``` bash
+cd $HOME/GitHub
 git clone https://github.com/input-output-hk/libsodium
 #git clone https://github.com/intersectmbo/libsodium
 
@@ -245,22 +247,7 @@ git tag | sort -V
 git checkout tags/10.1.3
 ```
 
-##### Configuring the build options
-
-We explicitly use the GHC version that we installed earlier. This avoids defaulting to a system version of GHC that might be different than the one you have installed.
-
-``` bash
-echo "with-compiler: ghc-8.10.7" >> cabal.project.local
-```
-
-Enable customized sodium:
-
-``` bash
-echo "package cardano-crypto-praos" >> cabal.project.local
-echo "  flags: -external-libsodium-vrf" >> cabal.project.local
-```
-
-##### Building and installing the node
+#### Building and installing the node
 
 Build the node and CLI with cabal:
 
@@ -274,7 +261,6 @@ cabal build cardano-cli
 ```
 
 Install the newly built node and CLI commands to the ```$HOME/.local/bin``` directory:
-
 
 ``` bash
 mkdir -p $HOME/.local/bin
@@ -305,8 +291,6 @@ Add Path:
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-## Pool Marketing
+## Next Up
 
-- https://cardano.tw/news/Staking-Tools/?lang=tw&p=2
-- https://adapool.one/pages/chinese_main.html
-- https://cardano.tw
+[configure the nodes](configure.md).
