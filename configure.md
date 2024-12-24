@@ -122,6 +122,14 @@ netstat -tulpn
 ss -tulpn
 ```
 
+## Time Sync
+
+``` bash
+sudo systemctl enable systemd-timesyncd
+sudo systemctl start systemd-timesyncd
+sudo systemctl status systemd-timesyncd
+```
+
 ## References
 
 - [operate-a-stake-pool](https://developers.cardano.org/docs/operate-a-stake-pool/generating-wallet-keys)

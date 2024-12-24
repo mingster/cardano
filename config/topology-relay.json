@@ -20,6 +20,11 @@
           "address": "220.135.171.33",
           "port": 6000,
           "name": "miniu"
+        },
+        {
+          "address": "66.187.76.81",
+          "port": 6000,
+          "name": "stm37"
         }
       ],
       "advertise": false,
