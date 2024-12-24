@@ -7,6 +7,11 @@
           "address": "45.77.133.15",
           "port": 6000,
           "name": "mx1"
+        },
+        {
+          "address": "66.187.76.81",
+          "port": 6000,
+          "name": "stm37"
         }
       ],
       "advertise": false,

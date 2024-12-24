@@ -10,9 +10,6 @@ export NODE_HOME="$HOME"
 export PATH="$HOME/bin:$PATH"
 EOF
 
-git clone https://github.com/mingster/cardano.git .
-
-mkdir -p ${HOME}/bin/
 mkdir -p ${HOME}/db/
 
 sudo mv $NODE_HOME/cardano-node.service /etc/systemd/system/cardano-node.service
