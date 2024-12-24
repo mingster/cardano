@@ -22,17 +22,18 @@ usermod -aG sudo cardano
 sudo -lU cardano
 ```
 
-## copy files to /home/cardano
+## Clone files to /home/cardano
 
 ``` bash
 # switch to the cardano user
 su -l cardano
 
 # clone
-git clone https://github.com/mingster/cardano.git .
+git clone https://github.com/mingster/cardano.git
 
 cd cardano
 mv * ..
+cd ..;rm -rf cardano
 ```
 
 Link config.json & topology.json for relay / block producer
@@ -43,6 +44,21 @@ cd config
 # e.g. on block producer
 ln -s -f config-bp.json config.json
 ln -s -f ln -s -f topology-bp.json topology.json
+```
+
+## Env for cardano user
+
+.bashrc
+
+``` bash
+# Set an environment variable indicating the file path to configuration files and scripts
+# related to operating your Cardano node
+export NODE_HOME="$HOME"
+export PATH="$HOME/bin:$PATH"
+```
+
+``` bash
+mkdir -p ${HOME}/db/
 ```
 
 ## Firewall
@@ -81,6 +97,7 @@ sudo ufw status
 ## Review and test run startCardanoNode.sh
 
 ``` bash
+chmod +x startCardanoNode.sh
 bash startCardanoNode.sh
 ```
 
