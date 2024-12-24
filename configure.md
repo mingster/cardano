@@ -10,7 +10,7 @@ sudo useradd -m -s /bin/bash cardano
 sudo passwd cardano
 
 # Add cardano to the sudo group
-sudo usermod -aG sudo cardano
+usermod -aG sudo cardano
 ```
 
 in archlinux:

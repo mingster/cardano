@@ -27,6 +27,18 @@ sed -i env \
 
 Review the ```env``` file.
 
+## Generating Keys for the Block-producing Node
+
+- [Generating Keys for the Block-producing Node](https://www.coincashew.com/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node/part-iii-operation/generating-keys-for-the-block-producing-node)
+
+``` bash
+cd $NODE_HOME
+
+cardano-cli conway node key-gen-KES \
+    --verification-key-file kes.vkey \
+    --signing-key-file kes.skey
+```
+
 ## Referneces
 
 [Starting the nodes](https://www.coincashew.com/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node/part-iii-operation/starting-the-nodes)
